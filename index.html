@@ -1,11 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Father</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .bio {
+            padding: 30px 20px;
+            text-align: center;
+            color: #333;
+            font-size: 15px;
+            line-height: 1.6;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .links {
+            padding: 20px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .link-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+            border-color: #667eea;
+        }
+
+        .link-item:active {
+            transform: scale(0.98);
+        }
+
+        .link-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            font-size: 24px;
+        }
+
+        .link-text {
+            font-size: 16px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .link-arrow {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .link-item:hover .link-arrow {
+            opacity: 1;
+        }
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            animation: modalSlideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .close-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 16px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>John Doe</h1>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/120" alt="Profile" class="profile-img">
+            <h1 class="name">Marco Aurelio da Silva</h1>
+            <p class="title">Your Professional Title</p>
+        </div>
+
+        <div class="bio">
+            Brief description about yourself. What you do, your passion, or a short introduction that makes people want to connect with you.
+        </div>
+
+        <div class="links">
+            <a href="#" class="link-item" id="infoBtn">
+                <span class="link-icon">ℹ️</span>
+                <span class="link-text">Informações Pessoais</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="mailto:your.email@example.com" class="link-item">
+                <span class="link-icon">✉️</span>
+                <span class="link-text">Email</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="tel:+1234567890" class="link-item">
+                <span class="link-icon">📱</span>
+                <span class="link-text">Phone</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://linkedin.com/in/yourprofile" class="link-item" target="_blank">
+                <span class="link-icon">💼</span>
+                <span class="link-text">LinkedIn</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://github.com/yourusername" class="link-item" target="_blank">
+                <span class="link-icon">💻</span>
+                <span class="link-text">GitHub</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://twitter.com/yourusername" class="link-item" target="_blank">
+                <span class="link-icon">🐦</span>
+                <span class="link-text">Twitter</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://yourwebsite.com" class="link-item" target="_blank">
+                <span class="link-icon">🌐</span>
+                <span class="link-text">Website</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://instagram.com/yourusername" class="link-item" target="_blank">
+                <span class="link-icon">📸</span>
+                <span class="link-text">Instagram</span>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            Connect with me! 🚀
+        </div>
+    </div>
+
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Informações Pessoais</h2>
+                <button class="close-btn" id="closeBtn">×</button>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Idade atual:</span>
+                <span class="info-value">41 anos</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Altura:</span>
+                <span class="info-value">1,75 m</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Condição:</span>
+                <span class="info-value">Autismo atípico</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Tipo sanguíneo:</span>
+                <span class="info-value">O+</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const infoBtn = document.getElementById('infoBtn');
+        const modal = document.getElementById('infoModal');
+        const closeBtn = document.getElementById('closeBtn');
+
+        infoBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
