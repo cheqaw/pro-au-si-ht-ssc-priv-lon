@@ -242,6 +242,85 @@
             font-weight: 500;
         }
 
+        .emergency-btn {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .emergency-btn:hover {
+            background: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .phone-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            border-left: 4px solid #4caf50;
+            transition: all 0.3s ease;
+        }
+
+        .phone-item:hover {
+            background: #4caf50;
+            color: white;
+            transform: translateX(3px);
+        }
+
+        .phone-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .phone-details {
+            flex: 1;
+        }
+
+        .phone-label {
+            font-size: 12px;
+            opacity: 0.8;
+            display: block;
+        }
+
+        .phone-number {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #666;
+            margin: 20px 0 10px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .alert-info {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: #fff3cd;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .alert-label {
+            font-weight: 700;
+            color: #856404;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .alert-value {
+            color: #333;
+        }
+
         @media (max-width: 480px) {
             .container {
                 border-radius: 16px;
@@ -265,7 +344,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://via.placeholder.com/120" alt="Profile" class="profile-img">
+            <img src="img.png" alt="Marco Aurelio da Silva" class="profile-img">
             <h1 class="name">Marco Aurelio da Silva</h1>
             <p class="title">Your Professional Title</p>
         </div>
@@ -281,45 +360,33 @@
                 <span class="link-arrow">→</span>
             </a>
 
+            <a href="#" class="link-item emergency-btn" id="emergencyBtn">
+                <span class="link-icon">🚨</span>
+                <span class="link-text">Informações de Emergência</span>
+                <span class="link-arrow">→</span>
+            </a>
+
             <a href="mailto:your.email@example.com" class="link-item">
                 <span class="link-icon">✉️</span>
                 <span class="link-text">Email</span>
                 <span class="link-arrow">→</span>
             </a>
 
-            <a href="tel:+1234567890" class="link-item">
-                <span class="link-icon">📱</span>
-                <span class="link-text">Phone</span>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://linkedin.com/in/yourprofile" class="link-item" target="_blank">
-                <span class="link-icon">💼</span>
-                <span class="link-text">LinkedIn</span>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://github.com/yourusername" class="link-item" target="_blank">
-                <span class="link-icon">💻</span>
-                <span class="link-text">GitHub</span>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://twitter.com/yourusername" class="link-item" target="_blank">
-                <span class="link-icon">🐦</span>
-                <span class="link-text">Twitter</span>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://yourwebsite.com" class="link-item" target="_blank">
-                <span class="link-icon">🌐</span>
-                <span class="link-text">Website</span>
+            <a href="sms:+5511999999999" class="link-item">
+                <span class="link-icon">💬</span>
+                <span class="link-text">WhatsApp/SMS</span>
                 <span class="link-arrow">→</span>
             </a>
 
             <a href="https://instagram.com/yourusername" class="link-item" target="_blank">
                 <span class="link-icon">📸</span>
                 <span class="link-text">Instagram</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://music.youtube.com/playlist?list=RDATfccm9jaw&playnext=1&si=9tzB1hnXVeBX7zMP" class="link-item" target="_blank">
+                <span class="link-icon">🎸</span>
+                <span class="link-text">Playlist Rock</span>
                 <span class="link-arrow">→</span>
             </a>
         </div>
@@ -354,10 +421,67 @@
         </div>
     </div>
 
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🚨 Informações de Emergência</h2>
+                <button class="close-btn" id="closeEmergencyBtn">×</button>
+            </div>
+            
+            <div class="section-title">📞 Contatos de Emergência</div>
+            <a href="tel:+5511999999999" class="phone-item">
+                <span class="phone-icon">📱</span>
+                <div class="phone-details">
+                    <span class="phone-label">Contato 1</span>
+                    <span class="phone-number">+55 11 99999-9999</span>
+                </div>
+            </a>
+            <a href="tel:+5511988888888" class="phone-item">
+                <span class="phone-icon">📱</span>
+                <div class="phone-details">
+                    <span class="phone-label">Contato 2</span>
+                    <span class="phone-number">+55 11 98888-8888</span>
+                </div>
+            </a>
+            <a href="tel:+5511977777777" class="phone-item">
+                <span class="phone-icon">📱</span>
+                <div class="phone-details">
+                    <span class="phone-label">Contato 3</span>
+                    <span class="phone-number">+55 11 97777-7777</span>
+                </div>
+            </a>
+            <a href="tel:+5511966666666" class="phone-item">
+                <span class="phone-icon">📱</span>
+                <div class="phone-details">
+                    <span class="phone-label">Contato 4</span>
+                    <span class="phone-number">+55 11 96666-6666</span>
+                </div>
+            </a>
+
+            <div class="section-title">⚠️ Informações Importantes</div>
+            <div class="alert-info">
+                <span class="alert-label">Sensibilidades sensoriais:</span>
+                <span class="alert-value">Sensível a sons altos</span>
+            </div>
+            <div class="alert-info">
+                <span class="alert-label">Formas de apoio que ajudam:</span>
+                <span class="alert-value">Acalma-se melhor em ambientes silenciosos</span>
+            </div>
+            <div class="alert-info">
+                <span class="alert-label">Alergias:</span>
+                <span class="alert-value">Abacaxi, Novalgina</span>
+            </div>
+        </div>
+    </div>
+
     <script>
         const infoBtn = document.getElementById('infoBtn');
         const modal = document.getElementById('infoModal');
         const closeBtn = document.getElementById('closeBtn');
+
+        const emergencyBtn = document.getElementById('emergencyBtn');
+        const emergencyModal = document.getElementById('emergencyModal');
+        const closeEmergencyBtn = document.getElementById('closeEmergencyBtn');
 
         infoBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -371,6 +495,21 @@
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('active');
+            }
+        });
+
+        emergencyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            emergencyModal.classList.add('active');
+        });
+
+        closeEmergencyBtn.addEventListener('click', () => {
+            emergencyModal.classList.remove('active');
+        });
+
+        emergencyModal.addEventListener('click', (e) => {
+            if (e.target === emergencyModal) {
+                emergencyModal.classList.remove('active');
             }
         });
     </script>
