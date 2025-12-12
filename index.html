@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile Card</title>
+    <title>Meu Perfil NFC</title>
     <style>
         * {
             margin: 0;
@@ -19,6 +19,116 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            }
+
+            .container {
+                background: #0f3460;
+                color: #e8e8e8;
+            }
+
+            .bio {
+                color: #e8e8e8;
+                border-bottom: 1px solid #1a1a2e;
+            }
+
+            .link-item {
+                background: #16213e;
+                color: #e8e8e8;
+            }
+
+            .link-item:hover {
+                background: #667eea;
+                color: white;
+            }
+
+            .footer {
+                color: #888;
+            }
+
+            .modal {
+                background: rgba(0, 0, 0, 0.85);
+            }
+
+            .modal-content {
+                background: #0f3460;
+                color: #e8e8e8;
+            }
+
+            .modal-header {
+                border-bottom: 2px solid #1a1a2e;
+            }
+
+            .modal-title {
+                color: #e8e8e8;
+            }
+
+            .close-btn {
+                background: #16213e;
+                color: #e8e8e8;
+            }
+
+            .close-btn:hover {
+                background: #667eea;
+                color: white;
+            }
+
+            .info-item {
+                background: #16213e;
+                border-left: 4px solid #667eea;
+            }
+
+            .info-label {
+                color: #b8b8b8;
+            }
+
+            .info-value {
+                color: #e8e8e8;
+            }
+
+            .phone-item {
+                background: #1a3a2e;
+                color: #e8e8e8;
+                border-left: 4px solid #4caf50;
+            }
+
+            .phone-item:hover {
+                background: #4caf50;
+                color: white;
+            }
+
+            .section-title {
+                color: #b8b8b8;
+                border-bottom: 2px solid #1a1a2e;
+            }
+
+            .alert-info {
+                background: #3a3a1e;
+                border-left: 4px solid #ffc107;
+            }
+
+            .alert-label {
+                color: #ffd54f;
+            }
+
+            .alert-value {
+                color: #e8e8e8;
+            }
+
+            .emergency-btn {
+                background: #3a3a1e;
+                border-color: #ffc107;
+            }
+
+            .emergency-btn:hover {
+                background: #dc3545;
+                border-color: #dc3545;
+            }
         }
 
         .container {
@@ -346,33 +456,21 @@
         <div class="header">
             <img src="img.png" alt="Marco Aurelio da Silva" class="profile-img">
             <h1 class="name">Marco Aurelio da Silva</h1>
-            <p class="title">Your Professional Title</p>
+            <p class="title">Profissional do setor Metalúrgico e Autista N1</p>
         </div>
 
         <div class="bio">
-            Brief description about yourself. What you do, your passion, or a short introduction that makes people want to connect with you.
+            Olá! Eu sou autista e uso este cartão para facilitar minha comunicação. Aqui você encontra informações importantes sobre mim e contatos para ajudar caso eu precise. Obrigado pela compreensão!
         </div>
 
         <div class="links">
-            <a href="#" class="link-item" id="infoBtn">
-                <span class="link-icon">ℹ️</span>
-                <span class="link-text">Informações Pessoais</span>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="#" class="link-item emergency-btn" id="emergencyBtn">
-                <span class="link-icon">🚨</span>
-                <span class="link-text">Informações de Emergência</span>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="mailto:your.email@example.com" class="link-item">
+            <a href="mailto:markinhooss@yahoo.com" class="link-item">
                 <span class="link-icon">✉️</span>
-                <span class="link-text">Email</span>
+                <span class="link-text">Email do Marco</span>
                 <span class="link-arrow">→</span>
             </a>
 
-            <a href="sms:+5511999999999" class="link-item">
+            <a href="sms:+5543998421772" class="link-item">
                 <span class="link-icon">💬</span>
                 <span class="link-text">WhatsApp/SMS</span>
                 <span class="link-arrow">→</span>
@@ -387,6 +485,18 @@
             <a href="https://music.youtube.com/playlist?list=RDATfccm9jaw&playnext=1&si=9tzB1hnXVeBX7zMP" class="link-item" target="_blank">
                 <span class="link-icon">🎸</span>
                 <span class="link-text">Playlist Rock</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="#" class="link-item" id="infoBtn">
+                <span class="link-icon">ℹ️</span>
+                <span class="link-text">Informações Pessoais</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="#" class="link-item emergency-btn" id="emergencyBtn">
+                <span class="link-icon">🚨</span>
+                <span class="link-text">Informações de Emergência</span>
                 <span class="link-arrow">→</span>
             </a>
         </div>
