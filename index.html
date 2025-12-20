@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#667eea">
     <meta name="description" content="Marco Aurelio da Silva - Cartão Digital">
     <title>Marco Aurelio da Silva</title>
@@ -57,7 +57,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
+            padding: 1.25rem;
+            padding-top: max(1.25rem, env(safe-area-inset-top));
+            padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+            padding-left: max(1.25rem, env(safe-area-inset-left));
+            padding-right: max(1.25rem, env(safe-area-inset-right));
             transition: background 0.3s ease;
         }
 
@@ -327,6 +331,14 @@
 
         /* Small mobile devices */
         @media (max-width: 375px) {
+            body {
+                padding: 0.75rem;
+                padding-top: max(0.75rem, env(safe-area-inset-top));
+                padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+                padding-left: max(0.75rem, env(safe-area-inset-left));
+                padding-right: max(0.75rem, env(safe-area-inset-right));
+            }
+
             .profile-img {
                 width: 100px;
                 height: 100px;
@@ -340,6 +352,33 @@
                 padding: 1.875rem 1.25rem;
             }
         }
+
+        /* Extra padding for very large screens */
+        @media (min-width: 768px) {
+            body {
+                padding: 2rem;
+            }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .main-container {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Notch/Dynamic Island support for newer iPhones */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .modal-dialog {
+                margin-top: max(1.75rem, env(safe-area-inset-top));
+                margin-bottom: max(1.75rem, env(safe-area-inset-bottom));
+            }
+        }
     </style>
 </head>
 <body>
@@ -348,11 +387,11 @@
             <div class="card-header-custom">
                 <img src="img.png" alt="Marco Aurelio da Silva" class="profile-img">
                 <h1 class="profile-name">Marco Aurelio da Silva</h1>
-                <p class="profile-title">Your Professional Title</p>
+                <p class="profile-title">Profissional do setor Metalúrgico e Autista N1</p>
             </div>
 
             <div class="bio-section">
-                Brief description about yourself. What you do, your passion, or a short introduction that makes people want to connect with you.
+                Olá! Eu sou autista e uso este cartão para facilitar minha comunicação. Aqui você encontra informações importantes sobre mim e contatos para ajudar caso eu precise. Obrigado pela compreensão!
             </div>
 
             <div class="links-container">
@@ -362,25 +401,25 @@
                     <span class="link-arrow">→</span>
                 </a>
 
-                <a href="mailto:your.email@example.com" class="link-btn">
+                <a href="mailto:markinhooss@yahoo.com" class="link-btn">
                     <span class="link-icon">✉️</span>
                     <span class="link-text">Email</span>
                     <span class="link-arrow">→</span>
                 </a>
 
-                <a href="sms:+5511999999999" class="link-btn">
-                    <span class="link-icon">💬</span>
-                    <span class="link-text">WhatsApp/SMS</span>
+                <a href="sms:+5543998421772" class="link-btn">
+                    <span class="link-icon">📱</span>
+                    <span class="link-text">Telefone</span>
                     <span class="link-arrow">→</span>
                 </a>
 
-                <a href="https://instagram.com/yourusername" class="link-btn" target="_blank">
+                <a href="https://www.instagram.com/marcus_aurelius_silvinus" class="link-btn" target="_blank">
                     <span class="link-icon">📸</span>
                     <span class="link-text">Instagram</span>
                     <span class="link-arrow">→</span>
                 </a>
 
-                <a href="https://music.youtube.com/playlist?list=RDATfccm9jaw&playnext=1&si=9tzB1hnXVeBX7zMP" class="link-btn" target="_blank">
+                <a href="https://open.spotify.com/playlist/7LJMGEAIHuRrQ1hW1MIQdB?si=ICz7KmabQ4Ck3RIcrs9Jrw&pi=DrSM7Y4yTsW2P" class="link-btn" target="_blank">
                     <span class="link-icon">🎸</span>
                     <span class="link-text">Playlist Rock</span>
                     <span class="link-arrow">→</span>
@@ -400,7 +439,7 @@
             </div>
 
             <div class="footer-custom">
-                Connect with me! 🚀
+                Feito com Claude! 🚀
             </div>
         </div>
     </div>
@@ -428,7 +467,7 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Tipo sanguíneo:</span>
-                        <span class="info-value">O+</span>
+                        <span class="info-value">A-</span>
                     </div>
                 </div>
             </div>
@@ -445,32 +484,32 @@
                 </div>
                 <div class="modal-body">
                     <div class="section-title">📞 Contatos de Emergência</div>
-                    <a href="tel:+5511999999999" class="phone-item">
+                    <a href="tel:+5511982434419" class="phone-item">
                         <span class="phone-icon">📱</span>
                         <div class="phone-details">
                             <span class="phone-label">Contato 1</span>
-                            <span class="phone-number">+55 11 99999-9999</span>
+                            <span class="phone-number">+55 (11) 98243-4419</span>
                         </div>
                     </a>
-                    <a href="tel:+5511988888888" class="phone-item">
+                    <a href="tel:+5511919921197" class="phone-item">
                         <span class="phone-icon">📱</span>
                         <div class="phone-details">
                             <span class="phone-label">Contato 2</span>
-                            <span class="phone-number">+55 11 98888-8888</span>
+                            <span class="phone-number">+55 (11) 1992-1197</span>
                         </div>
                     </a>
-                    <a href="tel:+5511977777777" class="phone-item">
+                    <a href="tel:+5543984870292" class="phone-item">
                         <span class="phone-icon">📱</span>
                         <div class="phone-details">
                             <span class="phone-label">Contato 3</span>
-                            <span class="phone-number">+55 11 97777-7777</span>
+                            <span class="phone-number">+55 (43) 98487-0292</span>
                         </div>
                     </a>
-                    <a href="tel:+5511966666666" class="phone-item">
+                    <a href="tel:+5511982435031" class="phone-item">
                         <span class="phone-icon">📱</span>
                         <div class="phone-details">
                             <span class="phone-label">Contato 4</span>
-                            <span class="phone-number">+55 11 96666-6666</span>
+                            <span class="phone-number">+55 (11) 98243-5031</span>
                         </div>
                     </a>
 
