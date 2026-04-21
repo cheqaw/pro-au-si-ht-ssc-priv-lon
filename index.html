@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Marco Aurelio da Silva - Cartão Digital">
+    <title>Marco Aurelio da Silva</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- REMOVIDO: Animate.css (~80kb) substituído por CSS puro abaixo -->
+
+    <style>
+        /* ======================================================
+           Variáveis e tema
+        ====================================================== */
+        :root {
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
+            --card-bg: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --link-bg: #f8f9fa;
+            --border-color: #f0f0f0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --gradient-start: #1a1a2e;
+                --gradient-end: #16213e;
+                --card-bg: #0f3460;
+                --text-primary: #e8e8e8;
+                --text-secondary: #b8b8b8;
+                --link-bg: #16213e;
+                --border-color: #1a1a2e;
+            }
+
+            .modal-content {
+                background-color: var(--card-bg) !important;
+                color: var(--text-primary) !important;
+            }
+
+            .btn-close {
+                filter: invert(1);
+            }
+
+            .phone-item {
+                background: #1a3a2e;
+                color: #e8e8e8;
+            }
+
+            .phone-item:hover {
+                background: #4caf50;
+                color: white;
+            }
+
+            .alert-info-custom {
+                background: #3a3a1e !important;
+            }
+
+            .alert-label {
+                color: #ffd54f !important;
+            }
+
+            .alert-value {
+                color: #e8e8e8;
+            }
+
+            .emergency-btn {
+                background: #3a3a1e !important;
+            }
+        }
+
+        /* ======================================================
+           Respeita preferência de movimento reduzido
+        ====================================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ======================================================
+           Base
+        ====================================================== */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.25rem;
+            padding-top: max(1.25rem, env(safe-area-inset-top));
+            padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+            padding-left: max(1.25rem, env(safe-area-inset-left));
+            padding-right: max(1.25rem, env(safe-area-inset-right));
+        }
+
+        .main-container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* ======================================================
+           Card
+        ====================================================== */
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            /* Estado inicial para animação via JS */
+            will-change: opacity, transform;
+        }
+
+        .card-header-custom {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 2.5rem 1.25rem;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-title {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        /* ======================================================
+           Bio
+        ====================================================== */
+        .bio-section {
+            padding: 1.875rem 1.25rem;
+            text-align: center;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* ======================================================
+           Links
+        ====================================================== */
+        .links-container {
+            padding: 1.25rem;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            background: var(--link-bg);
+            border-radius: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease,
+                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.3s ease;
+            border: 2px solid transparent;
+            /* Estado inicial para stagger via JS */
+            will-change: opacity, transform;
+        }
+
+        .link-btn:hover {
+            background: var(--gradient-start);
+            color: white;
+            transform: translateX(5px);
+            border-color: var(--gradient-start);
+        }
+
+        .link-btn:active {
+            transform: scale(0.98);
+        }
+
+        .link-icon {
+            font-size: 1.5rem;
+            margin-right: 0.9375rem;
+            min-width: 1.5rem;
+        }
+
+        .link-text {
+            font-size: 1rem;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .link-arrow {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+            font-size: 1.25rem;
+        }
+
+        .link-btn:hover .link-arrow {
+            opacity: 1;
+        }
+
+        .emergency-btn {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .emergency-btn:hover {
+            background: #dc3545 !important;
+            border-color: #dc3545 !important;
+        }
+
+        /* ======================================================
+           Footer
+        ====================================================== */
+        .footer-custom {
+            padding: 1.25rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+        }
+
+        /* ======================================================
+           Modal
+        ====================================================== */
+        .modal-content {
+            border-radius: 1.25rem;
+            border: none;
+            /* Animação controlada pelo JS, sem Animate.css */
+            will-change: opacity, transform;
+        }
+
+        .modal-header {
+            border-bottom: 2px solid var(--border-color);
+            padding: 1.5rem;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ======================================================
+           Info items (modal pessoal)
+        ====================================================== */
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.9375rem;
+            margin-bottom: 0.625rem;
+            background: var(--link-bg);
+            border-radius: 0.625rem;
+            border-left: 4px solid var(--gradient-start);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin: 1.25rem 0 0.625rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* ======================================================
+           Telefones de emergência
+        ====================================================== */
+        .phone-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0.9375rem;
+            margin-bottom: 0.5rem;
+            background: #e8f5e9;
+            border-radius: 0.625rem;
+            text-decoration: none;
+            color: #333;
+            border-left: 4px solid #4caf50;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .phone-item:hover {
+            background: #4caf50;
+            color: white;
+            transform: translateX(3px);
+        }
+
+        .phone-icon {
+            margin-right: 0.625rem;
+            font-size: 1.125rem;
+        }
+
+        .phone-details {
+            flex: 1;
+        }
+
+        .phone-label {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            display: block;
+        }
+
+        .phone-number {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* ======================================================
+           Alertas de emergência
+        ====================================================== */
+        .alert-info-custom {
+            padding: 0.75rem 0.9375rem;
+            margin-bottom: 0.5rem;
+            background: #fff3cd;
+            border-radius: 0.625rem;
+            border-left: 4px solid #ffc107;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .alert-label {
+            font-weight: 700;
+            color: #856404;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-value {
+            color: #333;
+        }
+
+        /* ======================================================
+           Responsividade
+        ====================================================== */
+        @media (max-width: 375px) {
+            body {
+                padding: 0.75rem;
+                padding-top: max(0.75rem, env(safe-area-inset-top));
+                padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+                padding-left: max(0.75rem, env(safe-area-inset-left));
+                padding-right: max(0.75rem, env(safe-area-inset-right));
+            }
+
+            .profile-img { width: 100px; height: 100px; }
+            .profile-name { font-size: 1.5rem; }
+            .card-header-custom { padding: 1.875rem 1.25rem; }
+        }
+
+        @media (min-width: 768px) {
+            body { padding: 2rem; }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            body { padding: 0.5rem; align-items: flex-start; }
+            .main-container { margin: 0.5rem 0; }
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .link-btn { min-height: 3rem; }
+        }
+
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .modal-dialog {
+                margin-top: max(1.75rem, env(safe-area-inset-top));
+                margin-bottom: max(1.75rem, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="profile-card">
+            <div class="card-header-custom">
+                <img src="img.png" alt="Foto de Marco Aurelio da Silva" class="profile-img">
+                <h1 class="profile-name">Marco Aurelio da Silva</h1>
+                <p class="profile-title">Profissional do setor Metalúrgico e Autista N1</p>
+            </div>
+
+            <div class="bio-section">
+                Olá! Eu sou autista e uso este cartão para facilitar minha comunicação.
+                Aqui você encontra informações importantes sobre mim e contatos para ajudar caso eu precise.
+                Obrigado pela compreensão!
+            </div>
+
+            <div class="links-container">
+                <!-- rel="noopener noreferrer" adicionado em todos os target="_blank" -->
+                <a href="ciptea.pdf" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon" aria-hidden="true">📄</span>
+                    <span class="link-text">Carteira de Autismo (CIPTEA)</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <a href="mailto:markinhooss@yahoo.com" class="link-btn">
+                    <span class="link-icon" aria-hidden="true">✉️</span>
+                    <span class="link-text">Email</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <a href="tel:+5543998421772" class="link-btn">
+                    <span class="link-icon" aria-hidden="true">📱</span>
+                    <span class="link-text">Telefone</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <a href="https://www.instagram.com/marcus_aurelius_silvinus" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon" aria-hidden="true">📸</span>
+                    <span class="link-text">Instagram</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <a href="https://open.spotify.com/playlist/7LJMGEAIHuRrQ1hW1MIQdB?si=ICz7KmabQ4Ck3RIcrs9Jrw&pi=DrSM7Y4yTsW2P" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <span class="link-icon" aria-hidden="true">🎸</span>
+                    <span class="link-text">Playlist Rock</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <a href="#" class="link-btn" data-bs-toggle="modal" data-bs-target="#infoModal">
+                    <span class="link-icon" aria-hidden="true">ℹ️</span>
+                    <span class="link-text">Informações Pessoais</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+
+                <a href="#" class="link-btn emergency-btn" data-bs-toggle="modal" data-bs-target="#emergencyModal">
+                    <span class="link-icon" aria-hidden="true">🚨</span>
+                    <span class="link-text">Informações de Emergência</span>
+                    <span class="link-arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
+
+            <div class="footer-custom">
+                Feito com Claude! 🚀
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Informações Pessoais -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Informações Pessoais</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="info-item">
+                        <span class="info-label">Idade atual:</span>
+                        <!-- Preenchido dinamicamente pelo main.js -->
+                        <span class="info-value" id="idade-atual">calculando...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Altura:</span>
+                        <span class="info-value">1,75 m</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Condição:</span>
+                        <span class="info-value">Autismo atípico</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tipo sanguíneo:</span>
+                        <span class="info-value">A-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Emergência -->
+    <div class="modal fade" id="emergencyModal" tabindex="-1" aria-labelledby="emergencyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emergencyModalLabel">🚨 Informações de Emergência</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="section-title">📞 Contatos de Emergência</div>
+
+                    <!-- ATENÇÃO: nomes dos contatos são mais úteis numa emergência que "Contato 1" etc. -->
+                    <!-- Substitua os nomes abaixo pelos nomes reais das pessoas -->
+                    <a href="tel:+5511982434419" class="phone-item">
+                        <span class="phone-icon">📱</span>
+                        <div class="phone-details">
+                            <span class="phone-label">Contato 1 — (substitua pelo nome)</span>
+                            <span class="phone-number">+55 (11) 98243-4419</span>
+                        </div>
+                    </a>
+                    <a href="tel:+5511919921197" class="phone-item">
+                        <span class="phone-icon">📱</span>
+                        <div class="phone-details">
+                            <!-- ATENÇÃO: número pode estar incorreto (verifique os dígitos) -->
+                            <span class="phone-label">Contato 2 — (substitua pelo nome)</span>
+                            <span class="phone-number">+55 (11) 19992-1197</span>
+                        </div>
+                    </a>
+                    <a href="tel:+5543984870292" class="phone-item">
+                        <span class="phone-icon">📱</span>
+                        <div class="phone-details">
+                            <span class="phone-label">Contato 3 — (substitua pelo nome)</span>
+                            <span class="phone-number">+55 (43) 98487-0292</span>
+                        </div>
+                    </a>
+                    <a href="tel:+5511982435031" class="phone-item">
+                        <span class="phone-icon">📱</span>
+                        <div class="phone-details">
+                            <span class="phone-label">Contato 4 — (substitua pelo nome)</span>
+                            <span class="phone-number">+55 (11) 98243-5031</span>
+                        </div>
+                    </a>
+
+                    <div class="section-title">⚠️ Informações Importantes</div>
+                    <div class="alert-info-custom">
+                        <span class="alert-label">Sensibilidades sensoriais:</span>
+                        <span class="alert-value">Sensível a sons altos</span>
+                    </div>
+                    <div class="alert-info-custom">
+                        <span class="alert-label">Formas de apoio que ajudam:</span>
+                        <span class="alert-value">Acalma-se melhor em ambientes silenciosos</span>
+                    </div>
+                    <div class="alert-info-custom">
+                        <span class="alert-label">Alergias:</span>
+                        <span class="alert-value">Abacaxi, Novalgina</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- JS próprio — carregado após o Bootstrap -->
+    <script src="main.js"></script>
+</body>
+</html>
